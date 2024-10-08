@@ -4,7 +4,7 @@ import requests
 mlb = mlbstatsapi.Mlb()
 
 # Get the player ID (e.g., Ty France)
-player_id = mlb.get_people_id("Ty France")[0]
+player_id = mlb.get_people_id("Shohei Ohtani")[0]
 
 # Define the stats and groups
 stats = ['season']
@@ -36,8 +36,35 @@ if hitting_stats:
                 print(f"Batting Average: {stat_data.avg}")
                 print(f"Hits: {stat_data.hits}")
                 print(f"Strikeouts: {stat_data.strikeouts}")
+                print(f"Stolen Bases: {stat_data.stolenbases}")
                 # Add more stats as needed
         else:
             print("No splits found for this stat type.")
 else:
     print("No hitting stats found.")
+
+stats2 = ['season']
+groups2 = ['pitching']
+params2 = {'season':2022}
+
+ohtani_stats = mlb.get_player_stats(player_id,stats2,groups2, **params2)
+
+pitching_stats = ohtani_stats.get('pitching', {})
+
+if pitching_stats:
+  for stat_type, stat_obj in pitching_stats.items():
+    print(f"\n{stat_type.capitalize()}")
+    
+    splits = stat_obj.splits
+    
+    if splits:
+      for split in splits:
+        stat_data = split.stat
+        print(f"ERA: {stat_data.era}")
+        print(f"Strikeouts: {stat_data.strikeouts}")
+                # Add more stats as needed
+      else:
+            print("No splits found for this stat type.")
+else:
+    print("No hitting stats found.")
+
