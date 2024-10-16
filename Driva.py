@@ -9,14 +9,11 @@ def PlayerStats(player):
 
   player_id = mlb.get_people_id(player)[0]
 
-
   stats = ['season']
   groups = ['hitting']
   params = {'season': 2024}
 
-
   player_stats = mlb.get_player_stats(player_id, stats, groups, **params)
-
 
   hitting_stats = player_stats.get('hitting', {})
 
@@ -24,14 +21,12 @@ def PlayerStats(player):
     for stat_type, stat_obj in hitting_stats.items():
         print(f"\n{stat_type.capitalize()} Stats:")
 
-
         splits = stat_obj.splits
 
         if splits:
             for split in splits:
-
+              
                 stat_data = split.stat
-
 
                 print(f"Games Played: {stat_data.gamesplayed}")
                 print(f"Home Runs: {stat_data.homeruns}")
@@ -40,7 +35,6 @@ def PlayerStats(player):
                 print(f"Hits: {stat_data.hits}")
                 print(f"Strikeouts: {stat_data.strikeouts}")
                 print(f"Stolen Bases: {stat_data.stolenbases}\n")
-
         else:
           print("No hitting stats found.")
 
