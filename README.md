@@ -1,2 +1,2 @@
 ## Issues
-I don't have any I'm Special
+1. Problem getting player stats
